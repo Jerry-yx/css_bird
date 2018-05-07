@@ -1,0 +1,1 @@
+require('./bird.less');

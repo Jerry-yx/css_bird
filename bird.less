@@ -1,0 +1,145 @@
+@birdWidth:200px;
+@birdColor:#FFF702;
+@birdBeakColor:#FD9605;
+@birdEyeColor:black;
+@birdBlusherColor:#ECAE4F;
+@birdWingColor:#FFDE00;
+@birdShadowClor:#F5DF05;
+@level:20;
+
+*:before,
+  *:after {
+    position: absolute;
+    display: block;
+    content: '';
+  }
+
+.squre(squre;@size){
+	width:@size;
+	height:@size
+}
+.squre(notsqure;@width;@height){
+	width:@width;
+	height:@height
+}
+.borderRadius(circle;@radius){
+	border-radius:@radius;
+}	
+.borderRadius(radius;@top:0;@right:0;@bottom:0;@left:0){
+	border-radius:@top @right @bottom @left;
+}	
+.position(@top:'auto';@right:'auto';@bottom:'auto';@left:'auto'){
+	top:@top;
+	right:@right;
+	bottom:@bottom;
+	left:@left;
+	position:absolute;
+}
+.bird{
+	width:@birdWidth;
+	height:@birdWidth*1.1;
+	position:relative;
+	margin-top:30px;
+	&_head{
+		.squre(notsqure;60%;60%);
+		z-index:@level*2;
+		.position(@top:0;@right:0);
+		&:after{
+			z-index:@level;
+			background:@birdColor;
+			.position(@top:0;@right:0);
+			.borderRadius(radius;@top:48%;@right:48%);
+			.squre(squre;100%);
+		}
+	}
+	&_beak{
+		background:@birdBeakColor;
+		z-index:@level;
+		transform:rotateZ(130deg) skew(10deg,10deg);
+		.squre(squre;25%);
+		.borderRadius(radius;@top:20%;);
+		.position(@top:37%;@right:-10%);
+
+	}
+	&_eye{
+		z-index:@level+1;
+		background:@birdEyeColor;
+		.borderRadius(circle;50%);
+		.squre(squre;15%);
+		.position(@top:32%;@right:25%);
+	}
+	&_blusher{
+		z-index:@level+1;
+		background:@birdBlusherColor;
+		.borderRadius(circle;50%);
+		.squre(squre;12%);
+		.position(@top:44%;@right:43%);
+	}
+	&_hair{
+		z-index:@level+1;
+		.borderRadius(circle;50%);
+		.squre(squre;17%);
+		.position(@top:-13%;@right:43%);
+		&:before{
+			z-index:@level+2;
+			background:@birdColor;
+			transform:rotateZ(10deg);
+			.squre(notsqure;40%;100%);
+			.borderRadius(radius;@top:35%;@right:35%);
+			.position(@right:10%;@bottom:0);
+		}
+		&:after{
+			z-index:@level+2;
+			background:@birdColor;
+			transform:rotateZ(-25deg);
+			.squre(notsqure;40%;110%);
+			.borderRadius(radius;@top:35%;@right:35%);
+			.position(@left:5%;@bottom:0);
+		}
+	}
+	.reflection{
+		//.squre(squre;100%);
+		.position(@top:5%;@left:15%);
+		z-index:@level+2;
+		.borderRadius(circle;50%);
+		//background:@birdColor;
+		//border:6px solid white;
+	}
+	 .reflection{
+			.squre(notsqure;50%;50%);
+			.position(@top:35%;@left:8%);
+			z-index:@level+2;
+			.reflections(@n,@i:1) when (@i < @n){
+				.reflection@{i}{
+					background:white;
+					.borderRadius(circle;50%);
+					.squre(squre;10%);
+					.position(@top:@i*0.13*@i*1%-@i*5%;@left:@i*3%);
+				}
+				.reflections(@n, (@i + 1));
+			}
+			.reflections(16);
+			.reflections1(@n,@i:1) when (@i < @n){
+				.reflection@{i}{
+					display:none;
+				}
+				.reflections1(@n, (@i + 1));
+			}
+			.reflections1(13,9);
+		}
+	&_body{
+		.position(@top:35%;);
+		.squre(notsqure;100%;50%);
+		&:after{
+			background:@birdColor;
+			.squre(notsqure;100%;80%);
+			.borderRadius(radius;@bottom:60%;@right:35%;@left:65%);
+			border-left:0 solid transparent;
+			border-top:0 solid transparent;
+			z-index:@level+10;
+		}
+	} 
+	*{
+		position:absolute;
+	}
+} 
