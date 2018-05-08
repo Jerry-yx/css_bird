@@ -11,6 +11,10 @@
 body{
 	width: 100vw;
     margin: 0;
+    background:linear-gradient(to top,#ffffff,#cae9ff ,#0394FB 60%);
+    overflow:hidden;
+    border:1px solid transparent;
+    height:100vh;
 }
 *:before,
   *:after {
@@ -41,8 +45,8 @@ body{
 	position:absolute;
 }
 @keyframes fly{
-	from{margin-top:10%}
-	to{margin-top:13%}
+	from{margin-top:30vh}
+	to{margin-top:33vh}
 }
 @keyframes move{
 	from {left:2vw}
@@ -63,7 +67,7 @@ body{
 .move_place{
 	width:100%;
 	//.position(@top:0%;);
-	margin-top:30%;
+	margin-top:30vh;
 	animation:fly @moveDuration @moveTimeFunction infinite;
 	position:relative;
 }/* 
