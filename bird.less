@@ -1,12 +1,17 @@
-@birdWidth:200px;
+@birdWidth:20vw;
 @birdColor:#FFF702;
 @birdBeakColor:#FD9605;
 @birdEyeColor:black;
 @birdBlusherColor:#ECAE4F;
 @birdWingColor:#FFDE00;
-@birdShadowClor:#F5DF05;
+@birdShadowClor:#FFE300;
 @level:20;
-
+@moveTimeFunction:cubic-bezier(.65,.43,.14,1);
+@moveDuration:700ms;
+body{
+	width: 100vw;
+    margin: 0;
+}
 *:before,
   *:after {
     position: absolute;
@@ -35,20 +40,56 @@
 	left:@left;
 	position:absolute;
 }
+@keyframes fly{
+	from{margin-top:10%}
+	to{margin-top:13%}
+}
+@keyframes move{
+	from {left:2vw}
+	to {left:75vw}
+}
+@keyframes wing{
+	from {transform:rotateZ(-10deg)}
+	to {transform:rotateZ(15deg)}
+}
+@keyframes leg{
+	from {transform:rotateZ(120deg) rotateX(0deg)}
+	to {transform:rotateZ(123deg) rotateX(2deg)}
+}
+@keyframes eye{
+	 0%, 4%, 15%, 20%, 30%, 34%, 39%, 43%, 60%, 64%, 100%{height:15%;top:38%}
+	2%, 18%, 32%, 41%, 62%{height:3%;top:42%}
+}
+.move_place{
+	width:100%;
+	//.position(@top:0%;);
+	margin-top:30%;
+	animation:fly @moveDuration @moveTimeFunction infinite;
+	position:relative;
+}/* 
+.circle_container{
+	height:@birdWidth*1.3;
+	.position(@top:25%);
+}
+.circle{
+	.borderRadius(circle;50%);
+} */
 .bird{
 	width:@birdWidth;
 	height:@birdWidth*1.1;
 	position:relative;
-	margin-top:30px;
+	animation:move 10s infinite;
+	//.position(@left:10%;);
+	left:10%;
 	&_head{
-		.squre(notsqure;60%;60%);
+		.squre(notsqure;59%*1.1;59%);
 		z-index:@level*2;
 		.position(@top:0;@right:0);
 		&:after{
 			z-index:@level;
 			background:@birdColor;
 			.position(@top:0;@right:0);
-			.borderRadius(radius;@top:48%;@right:48%);
+			.borderRadius(radius;@top:48%;@right:48%;@bottom:27%);
 			.squre(squre;100%);
 		}
 	}
@@ -58,7 +99,7 @@
 		transform:rotateZ(130deg) skew(10deg,10deg);
 		.squre(squre;25%);
 		.borderRadius(radius;@top:20%;);
-		.position(@top:37%;@right:-10%);
+		.position(@top:47%;@right:-10%);
 
 	}
 	&_eye{
@@ -66,14 +107,15 @@
 		background:@birdEyeColor;
 		.borderRadius(circle;50%);
 		.squre(squre;15%);
-		.position(@top:32%;@right:25%);
+		.position(@top:38%;@right:22%);
+		animation:eye 10s forwards infinite;
 	}
 	&_blusher{
 		z-index:@level+1;
 		background:@birdBlusherColor;
 		.borderRadius(circle;50%);
-		.squre(squre;12%);
-		.position(@top:44%;@right:43%);
+		.squre(squre;13%);
+		.position(@top:50%;@right:40%);
 	}
 	&_hair{
 		z-index:@level+1;
@@ -130,15 +172,56 @@
 	&_body{
 		.position(@top:35%;);
 		.squre(notsqure;100%;50%);
+		overflow:hidden;
+		z-index:@level+10;
 		&:after{
 			background:@birdColor;
-			.squre(notsqure;100%;80%);
-			.borderRadius(radius;@bottom:60%;@right:35%;@left:65%);
-			border-left:0 solid transparent;
-			border-top:0 solid transparent;
-			z-index:@level+10;
+			.squre(notsqure;100%;160%);
+			.position(@top:-72%;);
+			.borderRadius(radius;@left:100%;@bottom:100%;);
+			
+		}
+		&:before{
+			background:@birdShadowClor;
+			.squre(notsqure;100%;180%);
+			.position(@top:-80%;);
+			.borderRadius(radius;@left:100%;@bottom:100%;);
 		}
 	} 
+	&_wing{
+		.squre(notsqure;49%;45%);
+		.position(@left:5%;@top:25%);
+		.borderRadius(radius;@top:7%;@right:10%);
+		overflow:hidden;
+		z-index:@level+22;
+		transform:rotateZ(20deg);
+		transform-origin: right top;
+		animation:wing @moveDuration @moveTimeFunction infinite;
+		&:before{
+			background:@birdShadowClor;
+			.squre(squre;100%);
+			.position(@top:-40%;);
+			.borderRadius(radius;@top:10%;@right:10%;@left:200%;@bottom:200%;);
+			
+		}
+	}
+	&_leg{
+		.squre(notsqure;15%;15%);
+		.position(@left:25%;@top:76%);
+		&:after{
+			.squre(notsqure;45%;50%);
+			background:@birdBeakColor;
+			transform:rotateZ(30deg);
+		}
+		&:before{
+			.squre(notsqure;45%;140%);
+			background:@birdBeakColor;
+			transform:rotateZ(120deg);
+			.position(@left:0%;@top:2%);
+			.borderRadius(circle;100vw);
+			animation:leg 400ms ease-in infinite;
+		}
+	}
 	*{
 		position:absolute;
 	}
