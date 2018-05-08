@@ -6,8 +6,8 @@
 @birdWingColor:#FFDE00;
 @birdShadowClor:#FFE300;
 @level:20;
-@moveTimeFunction:cubic-bezier(.65,.43,.14,1);
-@moveDuration:700ms;
+@moveTimeFunction:cubic-bezier(.54,.04,.24,.98);
+@moveDuration:400ms;
 body{
 	width: 100vw;
     margin: 0;
@@ -46,7 +46,7 @@ body{
 }
 @keyframes fly{
 	from{margin-top:30vh}
-	to{margin-top:33vh}
+	to{margin-top:32vh}
 }
 @keyframes move{
 	from {left:2vw}
@@ -68,7 +68,7 @@ body{
 	width:100%;
 	//.position(@top:0%;);
 	margin-top:30vh;
-	animation:fly @moveDuration @moveTimeFunction infinite;
+	animation:fly @moveDuration @moveTimeFunction infinite alternate;
 	position:relative;
 }/* 
 .circle_container{
@@ -200,7 +200,7 @@ body{
 		z-index:@level+22;
 		transform:rotateZ(20deg);
 		transform-origin: right top;
-		animation:wing @moveDuration @moveTimeFunction infinite;
+		animation:wing @moveDuration @moveTimeFunction infinite alternate;
 		&:before{
 			background:@birdShadowClor;
 			.squre(squre;100%);
